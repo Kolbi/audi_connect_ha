@@ -3,8 +3,6 @@ Audi Connect Integration for Home Assistant
 
 [![GitHub Activity][commits-shield]][commits]
 [![License][license-shield]](LICENSE.md)
-[![Code Style][blackbadge]][black]
-
 [![hacs][hacsbadge]](hacs)
 
 Maintainers Wanted
