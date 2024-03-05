@@ -289,8 +289,8 @@ class AudiService:
         )
 
     async def get_tripdata(self, vin: str, kind: str):
-        self._api.use_token(self._bearer_token_json);
-        
+        self._api.use_token(self._bearer_token_json)
+
         td_reqdata = {
             "type": "list",
             "from": "1970-01-01T00:00:00Z",
@@ -299,9 +299,11 @@ class AudiService:
         }
         data = await self._api.get(
             "{homeRegion}/fs-car/bs/tripstatistics/v1/{type}/{country}/vehicles/{vin}/tripdata/{kind}".format(
-                 homeRegion=await self._get_home_region(vin.upper()),
-                type=self._type, country=self._country, vin=vin.upper(),
-                kind=kind
+                homeRegion=await self._get_home_region(vin.upper()),
+                type=self._type,
+                country=self._country,
+                vin=vin.upper(),
+                kind=kind,
             ),
             None,
             params=td_reqdata,
