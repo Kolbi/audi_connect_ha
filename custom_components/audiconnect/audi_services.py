@@ -289,35 +289,23 @@ class AudiService:
         )
 
     async def get_tripdata(self, vin: str, kind: str):
-        self._api.use_token(self.vwToken)
-
-        # read tripdata
-        headers = {
-            "Accept": "application/json",
-            "Accept-Charset": "utf-8",
-            "X-App-Name": "myAudi",
-            "X-App-Version": AudiAPI.HDR_XAPP_VERSION,
-            "X-Client-ID": self.xclientId,
-            "User-Agent": AudiAPI.HDR_USER_AGENT,
-            "Authorization": "Bearer " + self.vwToken["access_token"],
-        }
+        self._api.use_token(self._bearer_token_json);
+        
         td_reqdata = {
             "type": "list",
             "from": "1970-01-01T00:00:00Z",
             # "from":(datetime.utcnow() - timedelta(days=365)).strftime("%Y-%m-%dT%H:%M:%SZ"),
             "to": (datetime.utcnow() + timedelta(minutes=90)).strftime("%Y-%m-%dT%H:%M:%SZ"),
         }
-        data = await self._api.request(
-            "GET",
-            "{homeRegion}/api/bs/tripstatistics/v1/vehicles/{vin}/tripdata/{kind}".format(
-                homeRegion=await self._get_home_region_setter(vin.upper()),
-                vin=vin.upper(),
-                kind=kind,
+        data = await self._api.get(
+            "{homeRegion}/fs-car/bs/tripstatistics/v1/{type}/{country}/vehicles/{vin}/tripdata/{kind}".format(
+                 homeRegion=await self._get_home_region(vin.upper()),
+                type=self._type, country=self._country, vin=vin.upper(),
+                kind=kind
             ),
             None,
             params=td_reqdata,
-            headers=headers,
-        )
+        ))
         td_sorted = sorted(
             data["tripDataList"]["tripData"],
             key=lambda k: k["overallMileage"],
