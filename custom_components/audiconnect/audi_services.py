@@ -305,7 +305,7 @@ class AudiService:
             ),
             None,
             params=td_reqdata,
-        ))
+        )
         td_sorted = sorted(
             data["tripDataList"]["tripData"],
             key=lambda k: k["overallMileage"],
