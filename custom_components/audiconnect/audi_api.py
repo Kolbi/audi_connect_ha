@@ -22,7 +22,6 @@ class AudiAPI:
     HDR_XAPP_VERSION = "4.23.1"
     HDR_USER_AGENT = "Android/4.23.1 (Build 800240120.root project 'onetouch-android'.ext.buildTime) Android/11"
 
-
     def __init__(self, session, proxy=None):
         self.__token = None
         self.__xclientid = None
@@ -61,7 +60,11 @@ class AudiAPI:
                         return response, txt
                     elif raw_contents:
                         return await response.read()
-                    elif response.status == 200 or response.status == 202 or response.status == 207:
+                    elif (
+                        response.status == 200
+                        or response.status == 202
+                        or response.status == 207
+                    ):
                         return await response.json(loads=json_loads)
                     else:
                         raise ClientResponseError(

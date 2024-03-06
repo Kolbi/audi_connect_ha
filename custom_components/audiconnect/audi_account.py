@@ -156,7 +156,6 @@ class AudiAccount(AudiConnectObserver):
             )
 
     async def update(self, now):
-
         """Update status from the online service."""
         try:
             if not await self.connection.update(None):

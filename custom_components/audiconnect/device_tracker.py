@@ -1,4 +1,5 @@
 """Support for tracking an Audi."""
+
 import logging
 
 from homeassistant.components.device_tracker import SOURCE_TYPE_GPS

@@ -1,4 +1,5 @@
 """Support for Audi Connect."""
+
 from datetime import timedelta
 import voluptuous as vol
 
@@ -10,7 +11,7 @@ from homeassistant.const import (
     CONF_PASSWORD,
     CONF_RESOURCES,
     CONF_SCAN_INTERVAL,
-    CONF_USERNAME
+    CONF_USERNAME,
 )
 
 from homeassistant.util.unit_system import (
@@ -103,7 +104,9 @@ async def async_setup_entry(hass, config_entry):
         unit_system = "imperial"
 
     if account not in hass.data[DOMAIN]:
-        data = hass.data[DOMAIN][account] = AudiAccount(hass, config_entry, unit_system=unit_system)
+        data = hass.data[DOMAIN][account] = AudiAccount(
+            hass, config_entry, unit_system=unit_system
+        )
         data.init_connection()
     else:
         data = hass.data[DOMAIN][account]
