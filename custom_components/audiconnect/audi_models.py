@@ -273,7 +273,7 @@ class VehicleDataResponse:
         for door in doors:
             status = door["status"]
             name = door["name"]
-            if not name + "Lock" in self.OLDAPI_MAPPING:
+            if name + "Lock" not in self.OLDAPI_MAPPING:
                 continue
             status = door["status"]
             lock = "0"
@@ -311,7 +311,7 @@ class VehicleDataResponse:
             status = window["status"]
             if (
                 status[0] == "unsupported"
-            ) or not name + "Window" in self.OLDAPI_MAPPING:
+            ) or name + "Window" not in self.OLDAPI_MAPPING:
                 continue
             windowField = {
                 "textId": self.OLDAPI_MAPPING[name + "Window"],

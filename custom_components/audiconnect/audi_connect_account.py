@@ -1,6 +1,5 @@
-import json
 import time
-from datetime import timedelta, datetime, timezone
+from datetime import datetime, timezone
 import logging
 import asyncio
 from typing import List
@@ -8,7 +7,6 @@ from typing import List
 from asyncio import TimeoutError
 from aiohttp import ClientResponseError
 
-import voluptuous as vol
 from abc import ABC, abstractmethod
 
 _LOGGER = logging.getLogger(__name__)
@@ -39,7 +37,6 @@ class AudiConnectAccount:
     def __init__(
         self, session, username: str, password: str, country: str, spin: str
     ) -> None:
-
         self._api = AudiAPI(session)
         self._audi_service = AudiService(self._api, country, spin)
 
@@ -123,7 +120,7 @@ class AudiConnectAccount:
 
             return True
 
-        except IOError as exception:
+        except OSError as exception:
             # Force a re-login in case of failure/exception
             self._loggedin = False
             _LOGGER.exception(exception)
@@ -428,7 +425,7 @@ class AudiConnectVehicle:
     def log_exception_once(self, exception, message):
         self._no_error = False
         err = message + ": " + str(exception).rstrip("\n")
-        if not err in self._logged_errors:
+        if err not in self._logged_errors:
             self._logged_errors.add(err)
             _LOGGER.error(err, exc_info=True)
 

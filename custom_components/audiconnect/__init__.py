@@ -15,14 +15,10 @@ from homeassistant.const import (
 )
 
 from homeassistant.util.unit_system import (
-    _CONF_UNIT_SYSTEM_US_CUSTOMARY,
-    METRIC_SYSTEM,
     US_CUSTOMARY_SYSTEM,
-    UnitSystem,
 )
 
 from .audi_account import AudiAccount
-from .audi_services import AudiService
 
 from .const import (
     DOMAIN,

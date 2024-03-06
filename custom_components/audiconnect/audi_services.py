@@ -1,12 +1,9 @@
-from abc import abstractmethod, ABCMeta
 import json
 import uuid
 import base64
 import os
-import math
 import re
 import logging
-from time import strftime, gmtime
 from datetime import timedelta, datetime
 
 from .audi_models import (
@@ -14,7 +11,6 @@ from .audi_models import (
     CurrentVehicleDataResponse,
     VehicleDataResponse,
     VehiclesResponse,
-    Vehicle,
 )
 from .audi_api import AudiAPI
 from .util import to_byte_array, get_attr
@@ -660,7 +656,6 @@ class AudiService:
     async def check_request_succeeded(
         self, url: str, action: str, successCode: str, failedCode: str, path: str
     ):
-
         for _ in range(MAX_RESPONSE_ATTEMPTS):
             await asyncio.sleep(REQUEST_STATUS_SLEEP)
 
@@ -866,7 +861,7 @@ class AudiService:
             c=self._country, l=self._language
         )
         openidcfg_url = (
-            "https://{0}.bff.cariad.digital/login/v1/idk/openid-configuration".format(
+            "https://{}.bff.cariad.digital/login/v1/idk/openid-configuration".format(
                 "na" if self._country.upper() == "US" else "emea"
             )
         )
