@@ -711,7 +711,7 @@ class AudiConnectVehicle:
                 "mileage": td_rst.mileage,
                 "startMileage": td_rst.startMileage,
                 "traveltime": td_rst.traveltime,
-                 "zeroEmissionDistance": td_cur.zeroEmissionDistance,
+                "zeroEmissionDistance": td_cur.zeroEmissionDistance,
                 "timestamp": td_rst.timestamp,
                 "reportReason": td_cur.reportReason,
                 "overallMileage": td_rst.overallMileage,
