@@ -67,13 +67,22 @@ class VehicleDataResponse:
         self._tryAppendStateWithTs(data, "hybridRange",                 -1, ["fuelStatus",   "rangeStatus",    "value",  "totalRange_km"])
 
         self._tryAppendStateWithTs(data, "stateOfCharge",               -1, ["charging",     "batteryStatus",  "value",  "currentSOC_pct"])
+        self._tryAppendStateWithTs(data, "cruisingRangeElectric_km",    -1, ["charging",     "batteryStatus",  "value",  "cruisingRangeElectric_km"])
+        
+        self._tryAppendStateWithTs(data, "chargingState",               -1, ["charging",     "chargingStatus", "value",  "chargingState"])
+        self._tryAppendStateWithTs(data, "chargeMode",                  -1, ["charging",     "chargingStatus", "value",  "chargeMode"])
         self._tryAppendStateWithTs(data, "chargingMode",                -1, ["charging",     "chargingStatus", "value",  "chargeType"])
         self._tryAppendStateWithTs(data, "actualChargeRate",            -1, ["charging",     "chargingStatus", "value",  "chargeRate_kmph"])
         self._tryAppendStateWithTs(data, "chargingPower",               -1, ["charging",     "chargingStatus", "value",  "chargePower_kW"])
-        self._tryAppendStateWithTs(data, "chargeMode",                  -1, ["charging",     "chargingStatus", "value",  "chargeMode"])
-        self._tryAppendStateWithTs(data, "chargingState",               -1, ["charging",     "chargingStatus", "value",  "chargingState"])
+        
         self._tryAppendStateWithTs(data, "plugState",                   -1, ["charging",     "plugStatus",     "value",  "plugConnectionState"])
+        self._tryAppendStateWithTs(data, "plugLockState",               -1, ["charging",     "plugStatus",     "value",  "plugLockState"])
+        self._tryAppendStateWithTs(data, "externalPower",               -1, ["charging",     "plugStatus",     "value",  "externalPower"])
+        self._tryAppendStateWithTs(data, "ledColor",                    -1, ["charging",     "plugStatus",     "value",  "ledColor"])
         self._tryAppendStateWithTs(data, "remainingChargingTime",       -1, ["charging",     "plugStatus",     "value",  "remainingChargingTimeToComplete_min"])
+        
+        self._tryAppendStateWithTs(data, "preferredChargeMode",         -1, ["charging",     "chargeMode",     "value",  "preferredChargeMode"])
+        self._tryAppendStateWithTs(data, "availableChargeModes",        -1, ["charging",     "chargeMode",     "value",  "availableChargeModes"])
 
         self._tryAppendStateWithTs(data, "climatisationState",          -1, ["climatisation", "auxiliaryHeatingStatus", "value", "climatisationState"])
 
