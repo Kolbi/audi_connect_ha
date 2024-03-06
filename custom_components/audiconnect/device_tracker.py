@@ -1,7 +1,7 @@
 """Support for tracking an Audi."""
 import logging
 
-from homeassistant.components.device_tracker import SourceType.GPS
+from homeassistant.components.device_tracker import SourceType
 from homeassistant.helpers.dispatcher import (
     async_dispatcher_connect,
     async_dispatcher_send,
