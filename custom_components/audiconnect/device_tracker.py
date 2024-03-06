@@ -79,7 +79,7 @@ class AudiDeviceTracker(TrackerEntity):
     @property
     def source_type(self):
         """Return the source type, eg gps or router, of the device."""
-        return SOURCE_TYPE_GPS
+        return SourceType.GPS
 
     async def async_added_to_hass(self):
         """Register state update callback."""
