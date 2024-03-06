@@ -1,21 +1,16 @@
 import logging
 from datetime import timedelta
-import threading
-import asyncio
 import voluptuous as vol
 
 import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers.dispatcher import (
-    async_dispatcher_connect,
     async_dispatcher_send,
 )
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.event import async_track_point_in_utc_time
 from homeassistant.util.dt import utcnow
 from homeassistant.const import (
-    CONF_NAME,
     CONF_PASSWORD,
-    CONF_RESOURCES,
     CONF_SCAN_INTERVAL,
     CONF_USERNAME,
 )
@@ -30,9 +25,6 @@ from .const import (
     CONF_ACTION,
     CONF_REGION,
     CONF_SPIN,
-    CONF_MUTABLE,
-    DEFAULT_UPDATE_INTERVAL,
-    MIN_UPDATE_INTERVAL,
     SIGNAL_STATE_UPDATED,
     TRACKER_UPDATE,
     COMPONENTS,
@@ -156,7 +148,6 @@ class AudiAccount(AudiConnectObserver):
             )
 
     async def update(self, now):
-
         """Update status from the online service."""
         try:
             if not await self.connection.update(None):

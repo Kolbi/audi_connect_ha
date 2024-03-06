@@ -1,4 +1,5 @@
 """Support for Audi Connect locks."""
+
 import logging
 
 from homeassistant.components.lock import LockEntity

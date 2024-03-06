@@ -1,14 +1,11 @@
-import requests
 import json
 import logging
-from datetime import timedelta, datetime
+from datetime import datetime
 
-import traceback
-import asyncio
 import async_timeout
 
 from asyncio import TimeoutError, CancelledError
-from aiohttp import ClientSession, ClientResponseError
+from aiohttp import ClientResponseError
 from aiohttp.hdrs import METH_GET, METH_POST, METH_PUT
 
 from typing import Dict
@@ -21,7 +18,6 @@ _LOGGER = logging.getLogger(__name__)
 class AudiAPI:
     HDR_XAPP_VERSION = "4.23.1"
     HDR_USER_AGENT = "Android/4.23.1 (Build 800240120.root project 'onetouch-android'.ext.buildTime) Android/11"
-
 
     def __init__(self, session, proxy=None):
         self.__token = None
@@ -61,7 +57,11 @@ class AudiAPI:
                         return response, txt
                     elif raw_contents:
                         return await response.read()
-                    elif response.status == 200 or response.status == 202 or response.status == 207:
+                    elif (
+                        response.status == 200
+                        or response.status == 202
+                        or response.status == 207
+                    ):
                         return await response.json(loads=json_loads)
                     else:
                         raise ClientResponseError(

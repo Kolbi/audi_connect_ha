@@ -1,11 +1,12 @@
 """Support for Audi Connect sensors."""
+
 import logging
 
 from homeassistant.components.binary_sensor import DEVICE_CLASSES, BinarySensorEntity
 from homeassistant.const import CONF_USERNAME
 
 from .audi_entity import AudiEntity
-from .const import DOMAIN, CONF_CARNAME
+from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 

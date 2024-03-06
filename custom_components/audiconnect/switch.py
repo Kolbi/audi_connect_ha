@@ -1,4 +1,5 @@
 """Support for Audi Connect switches"""
+
 import logging
 
 from homeassistant.helpers.entity import ToggleEntity
