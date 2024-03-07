@@ -720,7 +720,9 @@ class AudiConnectVehicle:
                 "mileage": td_cur.mileage,
                 "startMileage": td_cur.startMileage,
                 "traveltime": td_cur.traveltime,
+                "zeroEmissionDistance": td_cur.zeroEmissionDistance,
                 "timestamp": td_cur.timestamp,
+                "reportReason": td_cur.reportReason,
                 "overallMileage": td_cur.overallMileage,
             }
             self._vehicle.state[kind.lower() + "_reset"] = {
@@ -731,7 +733,9 @@ class AudiConnectVehicle:
                 "mileage": td_rst.mileage,
                 "startMileage": td_rst.startMileage,
                 "traveltime": td_rst.traveltime,
+                "zeroEmissionDistance": td_cur.zeroEmissionDistance,
                 "timestamp": td_rst.timestamp,
+                "reportReason": td_cur.reportReason,
                 "overallMileage": td_rst.overallMileage,
             }
 

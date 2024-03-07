@@ -250,7 +250,7 @@ class VehicleDataResponse:
             -1,
             ["climatisation", "auxiliaryHeatingStatus", "value", "climatisationState"],
         )
-
+        
     def _tryAppendStateWithTs(self, json, name, tsoff, loc):
         ts = None
         val = self._getFromJson(json, loc)
