@@ -56,9 +56,7 @@ class AudiEntity(Entity):
         """Return device specific state attributes."""
         return dict(
             self._instrument.attributes,
-            model="{}/{}".format(
-                self._instrument.vehicle_model, self._instrument.vehicle_name
-            ),
+            model=self._instrument.vehicle_model,
             model_year=self._instrument.vehicle_model_year,
             model_family=self._instrument.vehicle_model_family,
             title=self._instrument.vehicle_name,
@@ -73,8 +71,9 @@ class AudiEntity(Entity):
     @property
     def device_info(self):
         return {
-            "identifiers": {(DOMAIN, self._instrument.vehicle_name)},
+            "identifiers": {(DOMAIN, self._instrument.vehicle_name)}, #name as unique id? {(DOMAIN, self._instrument.vehicle_name),(VIN, self._instrument.vehicle_vin)},
             "manufacturer": "Audi",
-            "name": self._vehicle_name,
             "model": self._instrument.vehicle_model_family,
+            "name": self._vehicle_name,
+            "serial_number": self._instrument.vehicle_vin,     
         }
