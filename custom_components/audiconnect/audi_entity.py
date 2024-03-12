@@ -66,7 +66,7 @@ class AudiEntity(Entity):
 
     @property
     def unique_id(self):
-        return self._instrument.full_name         
+        return self._instrument.full_name
 
     @property
     def device_info(self):
