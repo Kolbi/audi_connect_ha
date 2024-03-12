@@ -113,7 +113,9 @@ async def async_setup_entry(hass, config_entry):
         dev_reg, entry.entry_id
     )
     for device in devices:
-        old_identifier = dict(device.identifiers).get(DOMAIN) #list(next(iter(device.identifiers)))
+        old_identifier = dict(device.identifiers).get(
+            DOMAIN
+        )  # list(next(iter(device.identifiers)))
         if old_identifier == self._instrument.vehicle_name:
             new_identifier = {(DOMAIN, self._instrument.vehicle_vin)}
             _LOGGER.debug(
