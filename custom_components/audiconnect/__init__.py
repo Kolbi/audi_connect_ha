@@ -7,6 +7,7 @@ import homeassistant.helpers.config_validation as cv
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.util.dt import utcnow
+from homeassistant import config_entries
 from homeassistant.const import (
     CONF_NAME,
     CONF_PASSWORD,
@@ -127,7 +128,7 @@ async def async_unload_entry(hass, config_entry):
 
 
 async def async_remove_config_entry_device(
-    hass: HomeAssistant, config_entry: ConfigEntry, device_entry: DeviceEntry
+    hass: HomeAssistant, config_entry: ConfigEntry, device_entry: DeviceEntry,  # pylint: disable=unused-argument
 ) -> bool:
     """Remove a config entry from a device."""
     return True
