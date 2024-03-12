@@ -75,5 +75,4 @@ class AudiEntity(Entity):
             "manufacturer": "Audi",
             "model": self._instrument.vehicle_model_family,
             "name": self._vehicle_name,
-            "serial_number": self._instrument.vehicle_vin,
         }
