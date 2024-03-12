@@ -6,7 +6,6 @@ import voluptuous as vol
 import homeassistant.helpers.config_validation as cv
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers import device_registry as dr
 from homeassistant.util.dt import utcnow
 from homeassistant.const import (
     CONF_NAME,
