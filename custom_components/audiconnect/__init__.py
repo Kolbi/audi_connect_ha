@@ -4,6 +4,7 @@ from datetime import timedelta
 import voluptuous as vol
 
 import homeassistant.helpers.config_validation as cv
+from homeassistant.helpers import device_registry as dr
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.util.dt import utcnow
@@ -130,7 +131,7 @@ async def async_unload_entry(hass, config_entry):
 async def async_remove_config_entry_device(
     hass: HomeAssistant,
     config_entry: ConfigEntry,
-    device_entry: DeviceEntry,  # pylint: disable=unused-argument
+    device_entry: dr.DeviceEntry
 ) -> bool:
     """Remove a config entry from a device."""
     return True
