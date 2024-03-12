@@ -107,22 +107,6 @@ async def async_setup_entry(hass, config_entry):
     else:
         data = hass.data[DOMAIN][account]
 
-    # Migrate device indentifiers
-    dev_reg = dr.async_get(hass)
-    devices: list[dr.DeviceEntry] = dr.async_entries_for_config_entry(
-        dev_reg, entry.entry_id
-    )
-    for device in devices:
-        old_identifier = dict(device.identifiers).get(
-            DOMAIN
-        )  # list(next(iter(device.identifiers)))
-        if old_identifier == self._instrument.vehicle_name:
-            new_identifier = {(DOMAIN, self._instrument.vehicle_vin)}
-            _LOGGER.debug(
-                "migrate identifier '%s' to '%s'", device.identifiers, new_identifier
-            )
-            dev_reg.async_update_device(device.id, new_identifiers=new_identifier)
-
     return await data.update(utcnow())
 
 
