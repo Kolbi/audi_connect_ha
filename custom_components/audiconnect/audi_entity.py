@@ -69,7 +69,7 @@ class AudiEntity(Entity):
         return self._instrument.full_name
 
     @property
-    def migrate_device_identifiers: # Migrate device identifiers
+    def migrate_device_identifiers(self): # Migrate device identifiers
     dev_reg = dr.async_get(hass)
     devices: list[dr.DeviceEntry] = dr.async_entries_for_config_entry(
         dev_reg, entry.entry_id
