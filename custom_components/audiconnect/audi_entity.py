@@ -71,9 +71,11 @@ class AudiEntity(Entity):
     @property
     def device_info(self):
         return {
-            "identifiers": {(DOMAIN, self._instrument.vehicle_name)}, #name as unique id? {(DOMAIN, self._instrument.vehicle_name),(VIN, self._instrument.vehicle_vin)},
+            "identifiers": {
+                (DOMAIN, self._instrument.vehicle_name)
+            },  # name as unique id? {(DOMAIN, self._instrument.vehicle_name),(VIN, self._instrument.vehicle_vin)},
             "manufacturer": "Audi",
             "model": self._instrument.vehicle_model_family,
             "name": self._vehicle_name,
-            "serial_number": self._instrument.vehicle_vin,     
+            "serial_number": self._instrument.vehicle_vin,
         }
