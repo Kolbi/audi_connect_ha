@@ -116,27 +116,11 @@ class AudiDeviceTracker(TrackerEntity):
         return self._instrument.full_name
 
     @property
-    def migrate_device_identifiers(self): # Migrate device identifiers
-    dev_reg = dr.async_get(self.hass)
-    devices: list[dr.DeviceEntry] = dr.async_entries_for_config_entry(
-        dev_reg, entry.entry_id
-    )
-    for device in devices:
-        old_identifier = dict(device.identifiers).get(
-            DOMAIN
-        )  # list(next(iter(device.identifiers)))
-        if old_identifier == self._instrument.vehicle_name:
-            new_identifier = {(DOMAIN, self._instrument.vehicle_vin)}
-            _LOGGER.debug(
-                "migrate identifier '%s' to '%s'", device.identifiers, new_identifier
-            )
-            dev_reg.async_update_device(device.id, new_identifiers=new_identifier)
-
-    @property
     def device_info(self):
         return {
-            "identifiers": {(DOMAIN, self._instrument.vehicle_vin)},
+            "identifiers": {(DOMAIN, self._instrument.vehicle_name)},
             "manufacturer": "Audi",
+            "model": self._instrument.vehicle_model_family,
             "name": self._vehicle_name,
         }
 
