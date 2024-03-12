@@ -172,7 +172,7 @@ class AudiAccount(AudiConnectObserver):
         device_id = service.data.get(CONF_VIN).lower()
         device = dr.async_get(self.hass).async_get(device_id)
         # vin = dict(device.identifiers).get(DOMAIN)
-        vin = dict(device.extra_state_attributes).get(vin)
+        vin = dict(device.extra_state_attributes).vin
         action = service.data.get(CONF_ACTION).lower()
 
         if action == "lock":
@@ -205,7 +205,7 @@ class AudiAccount(AudiConnectObserver):
         device_id = service.data.get(CONF_VIN).lower()
         device = dr.async_get(self.hass).async_get(device_id)
         # vin = dict(device.identifiers).get(DOMAIN)
-        vin = dict(device.extra_state_attributes).get(vin)
+        vin = dict(device.extra_state_attributes).vin
         await self._refresh_vehicle_data(vin)
 
     async def _refresh_vehicle_data(self, vin):
