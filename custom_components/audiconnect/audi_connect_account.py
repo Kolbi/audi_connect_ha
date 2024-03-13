@@ -608,7 +608,7 @@ class AudiConnectVehicle:
         try:
             result = await self._audi_service.get_charger(self._vehicle.vin)
             if result:
-                _LOGGER.debug(f"{DOMAIN} - get_charger Data: {result}")
+                _LOGGER.debug(f"audiconnect - get_charger Data: {result}")
                 self._vehicle.state["maxChargeCurrent"] = get_attr(
                     result, "charger.settings.maxChargeCurrent.content"
                 )
