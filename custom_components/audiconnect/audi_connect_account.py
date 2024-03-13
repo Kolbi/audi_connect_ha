@@ -408,8 +408,8 @@ class AudiConnectVehicle:
             await self.call_update(self.update_vehicle_position, 3)
             info = "climater"
             await self.call_update(self.update_vehicle_climater, 3)
-            # info = "charger"
-            # await self.call_update(self.update_vehicle_charger, 3)
+            info = "charger"
+            await self.call_update(self.update_vehicle_charger, 3)
             info = "preheater"
             await self.call_update(self.update_vehicle_preheater, 3)
             # Return True on success, False on error
@@ -608,6 +608,7 @@ class AudiConnectVehicle:
         try:
             result = await self._audi_service.get_charger(self._vehicle.vin)
             if result:
+                _LOGGER.debug(f"{DOMAIN} - get_charger Data: {result}")
                 self._vehicle.state["maxChargeCurrent"] = get_attr(
                     result, "charger.settings.maxChargeCurrent.content"
                 )
