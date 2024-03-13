@@ -197,7 +197,7 @@ class AudiService:
 
     async def get_charger(self, vin: str):
         self._api.use_token(self.vwToken)
-        return await self._api.get(
+        data = await self._api.get(
             "{homeRegion}/fs-car/bs/batterycharge/v1/{type}/{country}/vehicles/{vin}/charger".format(
                 homeRegion=await self._get_home_region(vin.upper()),
                 type=self._type,
@@ -205,6 +205,8 @@ class AudiService:
                 vin=vin.upper(),
             )
         )
+        _LOGGER.debug(f"{DOMAIN} - get_charger Data: {data}")
+        return data
 
     async def get_climater(self, vin: str):
         self._api.use_token(self.vwToken)
