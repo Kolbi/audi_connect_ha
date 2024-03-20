@@ -260,7 +260,7 @@ class VehicleDataResponse:
         ts = None
         val = self._getFromJson(json, loc)
         if name == "remainingChargingTime" and val is None:
-            val = 65535
+            val = 0
         if val:
             loc[tsoff:] = ["carCapturedTimestamp"]
             ts = self._getFromJson(json, loc)
