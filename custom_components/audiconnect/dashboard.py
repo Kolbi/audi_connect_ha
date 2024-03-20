@@ -381,7 +381,7 @@ class LastUpdate(Instrument):
         if type(val) == datetime:
             return str(val.astimezone(tz=None)) if val else None
         return val
-        
+
 
 def create_instruments():
     return [
