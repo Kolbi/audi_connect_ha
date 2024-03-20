@@ -379,7 +379,7 @@ class LastUpdate(Instrument):
     def state(self):
         val = super().state
         if type(val) == datetime:
-            return str(ts.astimezone(tz=None)) if ts else None
+            return str(val.astimezone(tz=None)) if val else None
         return val
         
 
