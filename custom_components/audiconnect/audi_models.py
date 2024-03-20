@@ -262,7 +262,7 @@ class VehicleDataResponse:
         if val is not None:
             loc[tsoff:] = ["carCapturedTimestamp"]
             ts = self._getFromJson(json, loc)
-        if val is not None: and ts:
+        if val is not None and ts:
             self.states.append({"name": name, "value": val, "measure_time": ts})
         _LOGGER.debug(f"audi_models.py - _tryAppendStateWithTs: json:{json} name:{name} tsoff:{tsoff} loc:{loc}: val:{val} ts:{ts}")
 
