@@ -378,8 +378,10 @@ class LastUpdate(Instrument):
     @property
     def state(self):
         val = super().state
+        if type(val) == datetime:
+            return str(ts.astimezone(tz=None)) if ts else None
         return val
-
+        
 
 def create_instruments():
     return [
