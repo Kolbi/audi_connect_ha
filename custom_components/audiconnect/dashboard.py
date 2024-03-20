@@ -361,6 +361,7 @@ class LastUpdate(Instrument):
             name="Last Update",
             icon="mdi:update",
         )
+        self.device_class = "timestamp"
         self.unit = None
 
     @property
