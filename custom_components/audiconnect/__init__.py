@@ -132,7 +132,7 @@ async def async_unload_entry(hass, config_entry):
 
 async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> bool:
     _LOGGER.debug("Migration to version %s.%s successful", config_entry.version, config_entry.minor_version)
-        device_registry = await dr.async_get(hass)
+    device_registry = await dr.async_get(hass)
         for entry_id, device in device_registry.devices.items():
             if device.domain == DOMAIN and "identifiers" in device.config_entries:
                 old_identifier = device.config_entries["identifiers"][0]
