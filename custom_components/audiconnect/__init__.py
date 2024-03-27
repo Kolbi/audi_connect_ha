@@ -137,7 +137,7 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry):
         new = {**config_entry.data}
         hass.config_entries.async_update_entry(config_entry, data=new, minor_version=0, version=2)
 
-        _LOGGER.debug("Migration to version %s.%s successful", config_entry.version, config_entry.minor_version)
+    _LOGGER.debug("Migration to version %s.%s successful", config_entry.version, config_entry.minor_version)
 
         device_registry = await dr.async_get(hass)
         for entry_id, device in device_registry.devices.items():
@@ -170,11 +170,6 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry):
 
     return True
 
-async def async_remove_config_entry_device(
-        hass: HomeAssistant,
-        config_entry: ConfigEntry,
-        device_entry: dr.DeviceEntry,
-    ) -> bool:
+async def async_remove_config_entry_device(hass: HomeAssistant, config_entry: ConfigEntry, device_entry: dr.DeviceEntry) -> bool:
         """Remove a config entry device."""
-
     return True
