@@ -168,6 +168,7 @@ async def migrate_existing_devices(self, hass):
                     device.id,
                 )
 
+
 async def update_integration_config(hass, entry_id, new_identifier):
     integration = await hass.async_get_integration(DOMAIN)
     await integration.async_update_device(entry_id, device_id=new_identifier["id"])
