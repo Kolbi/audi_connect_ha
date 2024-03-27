@@ -170,7 +170,7 @@ async def async_unload_entry(hass, config_entry):
                         device.name,
                         device.id,
                     )
-    
+
     return True
 
     async def async_remove_config_entry_device(
