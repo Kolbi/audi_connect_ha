@@ -142,7 +142,7 @@ async def async_migrate_entry(
         await hass.config_entries.async_update_entry(
             config_entry, data=new_data, minor_version=0, version=2
         )
-        _LOGGER.debug(
+        _LOGGER.info(
             f"Migration to version {config_entry.version}.{config_entry.minor_version} successful"
         )
 
