@@ -140,7 +140,9 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
         await hass.config_entries.async_update_entry(
             config_entry, data=new_data, minor_version=0, version=2
         )
-        _LOGGER.debug(f"Migration to version {config_entry.version}.{config_entry.minor_version} successful")
+        _LOGGER.debug(
+            f"Migration to version {config_entry.version}.{config_entry.minor_version} successful"
+        )
 
         # Get device registry and iterate through devices
         device_registry = await dr.async_get(hass)
@@ -150,7 +152,9 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
 
                 # Check for old identifier using f-string for clarity
                 if old_identifier[1] == self._instrument.vehicle_name:
-                    _LOGGER.info(f"Migrating device {device.name} ({device.id}) to new identifier")
+                    _LOGGER.info(
+                        f"Migrating device {device.name} ({device.id}) to new identifier"
+                    )
                     new_identifier = (DOMAIN, self._instrument.vehicle_vin)
                     try:
                         await device_registry.async_update_device(
@@ -160,10 +164,14 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
                     except Exception as e:
                         _LOGGER.error(f"Migration for device {device.name} failed: {e}")
                 else:
-                    _LOGGER.info(f"No migration necessary for device {device.name} ({device.id}) to new identifier")
+                    _LOGGER.info(
+                        f"No migration necessary for device {device.name} ({device.id}) to new identifier"
+                    )
 
     else:
-        _LOGGER.info(f"No migration necessary for config entry version {config_entry.version}")
+        _LOGGER.info(
+            f"No migration necessary for config entry version {config_entry.version}"
+        )
 
     return True
 
@@ -173,4 +181,3 @@ async def async_remove_config_entry_device(
 ) -> bool:
     """Remove a config entry from a device."""
     return True
-    
