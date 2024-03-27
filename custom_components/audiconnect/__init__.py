@@ -167,7 +167,7 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry):
                         device.name,
                         device.id,
                     )
-                    
+
     return True
 
 async def async_remove_config_entry_device(
@@ -176,5 +176,5 @@ async def async_remove_config_entry_device(
         device_entry: dr.DeviceEntry,
     ) -> bool:
         """Remove a config entry device."""
-        
+
     return True
