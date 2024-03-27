@@ -139,7 +139,7 @@ async def async_migrate_entry(
     if config_entry.version == 1:
         # Update config entry data with spread operator
         new_data = {**config_entry.data}
-        hass.config_entries.async_update_entry(
+        await hass.config_entries.async_update_entry(
             config_entry, data=new_data, minor_version=0, version=2
         )
         _LOGGER.info(
