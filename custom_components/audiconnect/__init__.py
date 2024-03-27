@@ -155,7 +155,6 @@ async def migrate_device_identifiers(self, hass):
                 )
                 new_identifier = (DOMAIN, self._instrument.vehicle_vin)
                 try:
-                    await update_integration_config(hass, entry_id, new_identifier)
                     device_registry.async_update_device(
                         entry_id, device_id=new_identifier["id"]
                     )
