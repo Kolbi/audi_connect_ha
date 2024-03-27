@@ -143,33 +143,34 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
             config_entry.minor_version,
         )
 
-    device_registry = await dr.async_get(hass)
-    for entry_id, device in device_registry.devices.items():
-        if device.domain == DOMAIN and "identifiers" in device.config_entries:
-            old_identifier = device.config_entries["identifiers"][0]
-            if old_identifier[1] == self._instrument.vehicle_name:  # Check old identifier
-                _LOGGER.info(
-                    "Migrating device %s (%s) to new identifier", device.name, device.id
-                )
-                new_identifier = (DOMAIN, self._instrument.vehicle_vin)
-                try:
-                    await device_registry.async_update_device(
-                        entry_id, device_id=new_identifier["id"]
+        device_registry = await dr.async_get(hass)
+        for entry_id, device in device_registry.devices.items():
+            if device.domain == DOMAIN and "identifiers" in device.config_entries:
+                old_identifier = device.config_entries["identifiers"][0]
+                if old_identifier[1] == self._instrument.vehicle_name:  # Check old identifier
+                    _LOGGER.info(
+                        "Migrating device %s (%s) to new identifier", device.name, device.id
                     )
-                    _LOGGER.info("Migration for device %s successful", device.name)
-                except Exception as e:
-                    _LOGGER.error(
-                        "Migration for device %s failed: %s", device.name, e
+                    new_identifier = (DOMAIN, self._instrument.vehicle_vin)
+                    try:
+                        await device_registry.async_update_device(
+                            entry_id, device_id=new_identifier["id"]
+                        )
+                        _LOGGER.info("Migration for device %s successful", device.name)
+                    except Exception as e:
+                        _LOGGER.error(
+                            "Migration for device %s failed: %s", device.name, e
+                        )
+                else:
+                    _LOGGER.info(
+                        "No migration necessary for device %s (%s) to new identifier",
+                        device.name,
+                        device.id,
                     )
-            else:
-                _LOGGER.info(
-                    "No migration necessary for device %s (%s) to new identifier",
-                    device.name,
-                    device.id,
-                )
 
     return True
 
 async def async_remove_config_entry_device(hass: HomeAssistant, config_entry: ConfigEntry, device_entry: dr.DeviceEntry) -> bool:
         """Remove a config entry device."""
+    
     return True
