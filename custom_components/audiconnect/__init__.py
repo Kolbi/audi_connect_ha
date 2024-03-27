@@ -131,7 +131,7 @@ async def async_unload_entry(hass, config_entry):
     return True
 
 async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry):
-     """Migrate an old config entry."""
+        """Migrate an old config entry."""
      if config_entry.version == 1:
 
         new = {**config_entry.data}
@@ -167,14 +167,12 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry):
                         device.name,
                         device.id,
                     )
-
     return True
 
-    async def async_remove_config_entry_device(
+async def async_remove_config_entry_device(
         hass: HomeAssistant,
         config_entry: ConfigEntry,
         device_entry: dr.DeviceEntry,
     ) -> bool:
         """Remove a config entry device."""
-
     return True
