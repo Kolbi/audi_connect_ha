@@ -2,6 +2,7 @@
 
 from datetime import timedelta
 import voluptuous as vol
+import logging
 
 import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers import device_registry as dr
@@ -32,6 +33,8 @@ from .const import (
     RESOURCES,
     COMPONENTS,
 )
+
+_LOGGER = logging.getLogger(__name__)
 
 CONFIG_SCHEMA = vol.Schema(
     {
@@ -83,6 +86,8 @@ async def async_setup(hass, config):
             DOMAIN, context={"source": config_entries.SOURCE_IMPORT}, data=data
         )
     )
+    # Migrate old identifier to new identifier
+    await migrate_existing_devices(hass)
 
     return True
 
@@ -133,3 +138,23 @@ async def async_remove_config_entry_device(
 ) -> bool:
     """Remove a config entry from a device."""
     return True
+
+async def migrate_existing_devices(hass):
+    device_registry = await dr.async_get(hass)
+    for entry_id, device in device_registry.devices.items():
+        if device.domain == DOMAIN and "identifiers" in device.config_entries:
+            old_identifier = device.config_entries["identifiers"][0]
+            if old_identifier[1] == self._instrument.vehicle_name:  # Überprüfen, ob alter Identifier verwendet wird
+                _LOGGER.info(
+                    "Migriere Gerät %s (%s) auf neuen Identifier", device.name, device.id
+                )
+                new_identifier = (DOMAIN, self._instrument.vehicle_vin)
+                try:
+                    await update_integration_config(hass, entry_id, new_identifier)
+                    _LOGGER.info("Migration für Gerät %s erfolgreich", device.name)
+                except Exception as e:
+                    _LOGGER.error("Migration für Gerät %s fehlgeschlagen: %s", device.name, e)
+            else:
+                             _LOGGER.info(
+                    "Keine Migration notwendig für Gerät %s (%s) auf neuen Identifier", device.name, device.id
+                )   
