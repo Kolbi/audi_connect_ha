@@ -130,40 +130,47 @@ async def async_unload_entry(hass, config_entry):
 
     return True
 
-    async def async_migrate_entry(
+     async def async_migrate_entry(
         self, hass: HomeAssistant, config_entry: ConfigEntry
     ) -> bool:
         """Migrate an old config entry."""
+     _LOGGER.debug("Migrating from version %s", config_entry.version)
+    if config_entry.version == 1:
 
-    device_registry = await dr.async_get(hass)
-    for entry_id, device in device_registry.devices.items():
-        if device.domain == DOMAIN and "identifiers" in device.config_entries:
-            old_identifier = device.config_entries["identifiers"][0]
-            if (
-                old_identifier[1] == self._instrument.vehicle_name
-            ):  # Überprüfen, ob alter Identifier verwendet wird
-                _LOGGER.info(
-                    "Migriere Gerät %s (%s) auf neuen Identifier",
-                    device.name,
-                    device.id,
-                )
-                new_identifier = (DOMAIN, self._instrument.vehicle_vin)
-                try:
-                    device_registry.async_update_device(
-                        entry_id, device_id=new_identifier["id"]
-                    )
-                    _LOGGER.info("Migration für Gerät %s erfolgreich", device.name)
-                except Exception as e:
-                    _LOGGER.error(
-                        "Migration für Gerät %s fehlgeschlagen: %s", device.name, e
-                    )
-            else:
-                _LOGGER.info(
-                    "Keine Migration notwendig für Gerät %s (%s) auf neuen Identifier",
-                    device.name,
-                    device.id,
-                )
+        new = {**config_entry.data}
+        hass.config_entries.async_update_entry(config_entry, data=new, minor_version=0, version=2)
 
+        _LOGGER.debug("Migration to version %s.%s successful", config_entry.version, config_entry.minor_version)
+
+        device_registry = await dr.async_get(hass)
+        for entry_id, device in device_registry.devices.items():
+            if device.domain == DOMAIN and "identifiers" in device.config_entries:
+                old_identifier = device.config_entries["identifiers"][0]
+                if (
+                    old_identifier[1] == self._instrument.vehicle_name
+                ):  # Überprüfen, ob alter Identifier verwendet wird
+                    _LOGGER.info(
+                        "Migriere Gerät %s (%s) auf neuen Identifier",
+                        device.name,
+                        device.id,
+                    )
+                    new_identifier = (DOMAIN, self._instrument.vehicle_vin)
+                    try:
+                        device_registry.async_update_device(
+                            entry_id, device_id=new_identifier["id"]
+                        )
+                        _LOGGER.info("Migration für Gerät %s erfolgreich", device.name)
+                    except Exception as e:
+                        _LOGGER.error(
+                            "Migration für Gerät %s fehlgeschlagen: %s", device.name, e
+                        )
+                else:
+                    _LOGGER.info(
+                        "Keine Migration notwendig für Gerät %s (%s) auf neuen Identifier",
+                        device.name,
+                        device.id,
+                    )
+    
     return True
 
     async def async_remove_config_entry_device(
