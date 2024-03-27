@@ -140,7 +140,7 @@ async def async_remove_config_entry_device(
     return True
 
 
-async def migrate_existing_devices(hass):
+async def migrate_existing_devices(self, hass):
     device_registry = await dr.async_get(hass)
     for entry_id, device in device_registry.devices.items():
         if device.domain == DOMAIN and "identifiers" in device.config_entries:
