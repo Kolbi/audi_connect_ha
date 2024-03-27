@@ -140,7 +140,7 @@ async def async_remove_config_entry_device(
     return True
 
 
-async def migrate_existing_devices(self, hass):
+async def migrate_device_identifiers(self, hass):
     device_registry = await dr.async_get(hass)
     for entry_id, device in device_registry.devices.items():
         if device.domain == DOMAIN and "identifiers" in device.config_entries:
@@ -156,6 +156,8 @@ async def migrate_existing_devices(self, hass):
                 new_identifier = (DOMAIN, self._instrument.vehicle_vin)
                 try:
                     await update_integration_config(hass, entry_id, new_identifier)
+                    device_registry.async_update_device(entry_id, device_id=new_identifier["id"])
+                )
                     _LOGGER.info("Migration für Gerät %s erfolgreich", device.name)
                 except Exception as e:
                     _LOGGER.error(
@@ -167,8 +169,3 @@ async def migrate_existing_devices(self, hass):
                     device.name,
                     device.id,
                 )
-
-
-async def update_integration_config(hass, entry_id, new_identifier):
-    integration = await hass.async_get_integration(DOMAIN)
-    await integration.async_update_device(entry_id, device_id=new_identifier["id"])
