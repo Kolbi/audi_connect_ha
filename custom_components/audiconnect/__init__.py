@@ -134,6 +134,7 @@ async def async_unload_entry(hass, config_entry):
         self, hass: HomeAssistant, config_entry: ConfigEntry
     ) -> bool:
         """Migrate an old config entry."""
+
     device_registry = await dr.async_get(hass)
     for entry_id, device in device_registry.devices.items():
         if device.domain == DOMAIN and "identifiers" in device.config_entries:
@@ -162,7 +163,7 @@ async def async_unload_entry(hass, config_entry):
                     device.name,
                     device.id,
                 )
-    
+
     return True
 
     async def async_remove_config_entry_device(
@@ -172,4 +173,5 @@ async def async_unload_entry(hass, config_entry):
         device_entry: dr.DeviceEntry,
     ) -> bool:
         """Remove a config entry device."""
+
     return True
