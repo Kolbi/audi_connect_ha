@@ -132,10 +132,9 @@ async def async_unload_entry(hass, config_entry):
 
 async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry):
         """Migrate an old config entry."""
-    if config_entry.version == 1:
-
-        new = {**config_entry.data}
-        hass.config_entries.async_update_entry(config_entry, data=new, minor_version=0, version=2)
+    #if config_entry.version == 1:
+     #   new = {**config_entry.data}
+    #    hass.config_entries.async_update_entry(config_entry, data=new, minor_version=0, version=2)
 
     _LOGGER.debug("Migration to version %s.%s successful", config_entry.version, config_entry.minor_version)
 
