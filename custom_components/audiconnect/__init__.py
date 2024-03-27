@@ -87,7 +87,7 @@ async def async_setup(hass, config):
         )
     )
     # Migrate old identifier to new identifier
-    await migrate_existing_devices(hass)
+    await migrate_device_identifiers(hass)
 
     return True
 
