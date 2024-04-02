@@ -159,9 +159,9 @@ async def async_migrate_entry(
             device_registry, config_entry.entry_id
             )
 
-             state = states.get({entity_id})
-                vin = state.attributes.get("extra_state_attributes").get("vin")
-                new_identifier = (DOMAIN, vin)
+            state = states.get({entity_id})
+            vin = state.attributes.get("extra_state_attributes").get("vin")
+            new_identifier = (DOMAIN, vin)
                 try:
                     #await device_registry.async_update_device(
                     #    entry_id, device_id=new_identifier["id"]
