@@ -140,9 +140,9 @@ async def async_migrate_entry(
     if config_entry.version == 1:
         # Update config entry data with spread operator
         new_data = {**config_entry.data}
-        #await hass.config_entries.async_update_entry(
+        # await hass.config_entries.async_update_entry(
         #    config_entry, data=new_data, minor_version=0, version=2
-        #)
+        # )
         _LOGGER.info(
             f"Migration to version {config_entry.version}.{config_entry.minor_version} successful"
         )
@@ -157,16 +157,18 @@ async def async_migrate_entry(
 
             registry = hass.helpers.entity_registry.async_get(hass)
             entities = hass.helpers.entity_registry.async_entries_for_config_entry(
-            registry, config_entry.entry_id
+                registry, config_entry.entry_id
             )
             for entity in entities:
-                state = hass.states.get(entity.entity_id)  # Access states using hass.states
+                state = hass.states.get(
+                    entity.entity_id
+                )  # Access states using hass.states
                 vin = state.attribute.vin
                 new_identifier = (DOMAIN, vin)
                 try:
-                        #await device_registry.async_update_device(
-                        #    entry_id, device_id=new_identifier["id"]
-                        #)
+                    # await device_registry.async_update_device(
+                    #    entry_id, device_id=new_identifier["id"]
+                    # )
                     _LOGGER.info(f"Migration for device {device.name} successful")
                 except Exception as e:
                     _LOGGER.error(f"Migration for device {device.name} failed: {e}")
