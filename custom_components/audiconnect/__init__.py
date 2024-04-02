@@ -150,7 +150,8 @@ async def async_migrate_entry(
         device_registry = dr.async_get(hass)
         for entry_id, device in device_registry.devices.items():
             # if device.domain == DOMAIN and "identifiers" in device.config_entries:
-            old_identifier = device.config_entries["identifiers"][0]
+            old_identifier = None
+            for identifier in device.config_entries["identifiers"]:
 
             # Check for old identifier using f-string for clarity
             if old_identifier[1] == self._instrument.vehicle_name:
