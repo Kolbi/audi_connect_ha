@@ -140,9 +140,9 @@ async def async_migrate_entry(
     if config_entry.version == 1:
         # Update config entry data with spread operator
         new_data = {**config_entry.data}
-        #await hass.config_entries.async_update_entry(
+        # await hass.config_entries.async_update_entry(
         #    config_entry, data=new_data, minor_version=0, version=2
-        #)
+        # )
         _LOGGER.info(
             f"Migration to version {config_entry.version}.{config_entry.minor_version} successful"
         )
@@ -156,16 +156,16 @@ async def async_migrate_entry(
             )
 
             entities = hass.helpers.entity_registry.async_entries_for_config_entry(
-            device_registry, config_entry.entry_id
+                device_registry, config_entry.entry_id
             )
 
             state = states.get({entity_id})
             vin = state.attributes.get("extra_state_attributes").get("vin")
             new_identifier = (DOMAIN, vin)
             try:
-                #await device_registry.async_update_device(
+                # await device_registry.async_update_device(
                 #    entry_id, device_id=new_identifier["id"]
-                #)
+                # )
                 _LOGGER.info(f"Migration for device {device.name} successful")
             except Exception as e:
                 _LOGGER.error(f"Migration for device {device.name} failed: {e}")
@@ -176,6 +176,7 @@ async def async_migrate_entry(
         )
 
     return True
+
 
 async def async_remove_config_entry_device(
     hass: HomeAssistant, config_entry: ConfigEntry, device_entry: dr.DeviceEntry
