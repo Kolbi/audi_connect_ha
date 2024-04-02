@@ -162,13 +162,13 @@ async def async_migrate_entry(
             state = states.get({entity_id})
             vin = state.attributes.get("extra_state_attributes").get("vin")
             new_identifier = (DOMAIN, vin)
-                try:
-                    #await device_registry.async_update_device(
-                    #    entry_id, device_id=new_identifier["id"]
-                    #)
-                    _LOGGER.info(f"Migration for device {device.name} successful")
-                except Exception as e:
-                    _LOGGER.error(f"Migration for device {device.name} failed: {e}")
+            try:
+                #await device_registry.async_update_device(
+                #    entry_id, device_id=new_identifier["id"]
+                #)
+                _LOGGER.info(f"Migration for device {device.name} successful")
+            except Exception as e:
+                _LOGGER.error(f"Migration for device {device.name} failed: {e}")
 
     else:
         _LOGGER.info(
