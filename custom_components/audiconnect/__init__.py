@@ -160,10 +160,6 @@ async def async_migrate_entry(
                     _LOGGER.info(f"Migration for device {device.name} successful")
                 except Exception as e:
                     _LOGGER.error(f"Migration for device {device.name} failed: {e}")
-            else:
-                _LOGGER.info(
-                    f"No migration necessary for device {device.name} ({device.id}) to new identifier"
-                )
 
     else:
         _LOGGER.info(
