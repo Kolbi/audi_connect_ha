@@ -153,7 +153,7 @@ async def async_migrate_entry(
                 f"Migrating device {device.name} ({device.id}) to new identifier"
             )
             for entity_id in device.entity_ids:
-            state = states.get({entity.id})
+            state = states.get({entity_id})
             vin = state.attributes.get("extra_state_attributes").get("vin")
             new_identifier = (DOMAIN, vin)
             try:
