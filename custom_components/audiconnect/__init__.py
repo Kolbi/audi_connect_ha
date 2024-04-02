@@ -149,17 +149,17 @@ async def async_migrate_entry(
         # Get device registry and iterate through devices
         device_registry = dr.async_get(hass)
         for entry_id, device in device_registry.devices.items():
-                _LOGGER.info(
-                    f"Migrating device {device.name} ({device.id}) to new identifier"
+            _LOGGER.info(
+                f"Migrating device {device.name} ({device.id}) to new identifier"
+            )
+            new_identifier = (DOMAIN, self._instrument.vehicle_vin)
+            try:
+                await device_registry.async_update_device(
+                    entry_id, device_id=new_identifier["id"]
                 )
-                new_identifier = (DOMAIN, self._instrument.vehicle_vin)
-                try:
-                    await device_registry.async_update_device(
-                        entry_id, device_id=new_identifier["id"]
-                    )
-                    _LOGGER.info(f"Migration for device {device.name} successful")
-                except Exception as e:
-                    _LOGGER.error(f"Migration for device {device.name} failed: {e}")
+                _LOGGER.info(f"Migration for device {device.name} successful")
+            except Exception as e:
+                _LOGGER.error(f"Migration for device {device.name} failed: {e}")
 
     else:
         _LOGGER.info(
