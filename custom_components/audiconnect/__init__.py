@@ -150,7 +150,7 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
             _LOGGER.info(
                 f"Migrating device {device.name} ({device.id}) to new identifier"
             )
-            new_identifier = (DOMAIN, self._instrument.vehicle_vin)
+            new_identifier = (DOMAIN, device._instrument.vehicle_vin)
             try:
                 await device_registry.async_update_device(
                     entry_id, device_id=new_identifier["id"]
