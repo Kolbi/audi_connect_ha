@@ -149,12 +149,12 @@ async def async_migrate_entry(
 
         # Get device registry and iterate through devices
         device_registry = dr.async_get(hass)
-    
+
         for entry_id, device in device_registry.devices.items():
             _LOGGER.info(
                 f"Migrating device {device.name} ({device.id}) to new identifier"
             )
-            
+
             entities = hass.helpers.entity_registry.async_entries_for_config_entry(
             device_registry, config_entry.entry_id
             )
