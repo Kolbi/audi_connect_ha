@@ -153,7 +153,7 @@ async def async_migrate_entry(
             _LOGGER.info(
                 f"Migrating device {device.name} ({device.id}) to new identifier"
             )
-            for entity_id in device.entity_ids:
+            for entity_id in hass.states.async_entity_ids(device.domain):
                 state = states.get({entity_id})
                 vin = state.attributes.get("extra_state_attributes").get("vin")
                 new_identifier = (DOMAIN, vin)
