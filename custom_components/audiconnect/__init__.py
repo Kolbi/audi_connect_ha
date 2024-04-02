@@ -131,7 +131,9 @@ async def async_unload_entry(hass, config_entry):
     return True
 
 
-async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> bool:
+async def async_migrate_entry(
+    hass: HomeAssistant, config_entry: ConfigEntry,
+) -> bool:
     """Migrates an old configuration entry to version 2."""
 
     if config_entry.version == 1:
@@ -150,7 +152,10 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
             _LOGGER.info(
                 f"Migrating device {device.name} ({device.id}) to new identifier"
             )
-            new_identifier = (DOMAIN, device.vin)
+            for entity_id in device.entity_ids:
+            state = states.get({entity.id})
+            vin = state.attributes.get("extra_state_attributes").get("vin")
+            new_identifier = (DOMAIN, vin)
             try:
                 await device_registry.async_update_device(
                     entry_id, device_id=new_identifier["id"]
