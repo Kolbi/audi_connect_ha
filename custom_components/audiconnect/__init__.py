@@ -147,7 +147,7 @@ async def async_migrate_entry(
         )
 
         # Get device registry and iterate through devices
-        device_registry = await dr.async_get(hass)
+        device_registry = dr.async_get(hass)
         for entry_id, device in device_registry.devices.items():
             if device.domain == DOMAIN and "identifiers" in device.config_entries:
                 old_identifier = device.config_entries["identifiers"][0]
