@@ -1,5 +1,6 @@
 import logging
 import voluptuous as vol
+import asyncio
 
 from homeassistant.helpers import config_validation as cv, device_registry as dr
 from homeassistant.helpers.dispatcher import (
@@ -32,6 +33,7 @@ from .const import (
     SIGNAL_STATE_UPDATED,
     TRACKER_UPDATE,
     COMPONENTS,
+    UPDATE_SLEEP,
 )
 
 REFRESH_VEHICLE_DATA_FAILED_EVENT = "refresh_failed"
@@ -62,6 +64,8 @@ SERVICE_START_CLIMATE_CONTROL_SCHEMA = vol.Schema(
         vol.Optional(CONF_CLIMATE_SEAT_RR): cv.boolean,
     }
 )
+
+SERVICE_REFRESH_CLOUD_DATA = "refresh_cloud_data"
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -102,6 +106,11 @@ class AudiAccount(AudiConnectObserver):
             SERVICE_START_CLIMATE_CONTROL,
             self.start_climate_control,
             schema=SERVICE_START_CLIMATE_CONTROL_SCHEMA,
+        )
+        self.hass.services.async_register(
+            DOMAIN,
+            SERVICE_REFRESH_CLOUD_DATA,
+            self.update,
         )
 
         self.connection.add_observer(self)
@@ -259,14 +268,22 @@ class AudiAccount(AudiConnectObserver):
 
         if res is True:
             await self.update(utcnow())
-
             self.hass.bus.fire(
                 "{}_{}".format(DOMAIN, REFRESH_VEHICLE_DATA_COMPLETED_EVENT),
                 {"vin": vin},
             )
-
         else:
             _LOGGER.exception("Error refreshing vehicle data %s", vin)
             self.hass.bus.fire(
                 "{}_{}".format(DOMAIN, REFRESH_VEHICLE_DATA_FAILED_EVENT), {"vin": vin}
             )
+
+            _LOGGER.info("Trying cloud update in %d seconds...", UPDATE_SLEEP)
+            await asyncio.sleep(UPDATE_SLEEP)
+
+            try:
+                _LOGGER.info("Trying cloud update now...")
+                await self.update(utcnow())
+
+            except Exception as e:
+                _LOGGER.exception("Cloud update failed: %s", str(e))
