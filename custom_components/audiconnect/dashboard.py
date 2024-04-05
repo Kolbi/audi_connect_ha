@@ -174,7 +174,6 @@ class BinarySensor(Instrument):
     def __init__(self, attr, name, device_class, icon=None):
         super().__init__(component="binary_sensor", attr=attr, name=name, icon=icon)
         self.device_class = device_class
-        self.state_class = None
 
     @property
     def is_mutable(self):
