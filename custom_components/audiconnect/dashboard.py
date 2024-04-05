@@ -392,169 +392,246 @@ def create_instruments():
         TripData(attr="longterm_reset", name="LongTerm Trip User Reset"),
         Lock(),
         Preheater(),
-        Sensor(attr="model", name="Model", icon="mdi:car-info", unit=None, state_class=None),
-        Sensor(attr="mileage", name="Mileage", icon="mdi:speedometer", unit="km", state_class=total_increasing),
+        Sensor(
+            attr="model", name="Model", icon="mdi:car-info", unit=None, state_class=None
+        ),
+        Sensor(
+            attr="mileage",
+            name="Mileage",
+            icon="mdi:speedometer",
+            unit="km",
+            state_class=total_increasing,
+        ),
         Sensor(
             attr="service_adblue_distance",
             name="AdBlue range",
             icon="mdi:gas-station",
-            unit="km", state_class=None
+            unit="km",
+            state_class=None,
         ),
-        Sensor(attr="range", name="Range", icon="mdi:gas-station", unit="km", state_class=None),
+        Sensor(
+            attr="range",
+            name="Range",
+            icon="mdi:gas-station",
+            unit="km",
+            state_class=None,
+        ),
         Sensor(
             attr="hybrid_range",
             name="hybrid Range",
             icon="mdi:gas-station-outline",
-            unit="km", state_class=None
+            unit="km",
+            state_class=None,
         ),
         Sensor(
             attr="service_inspection_time",
             name="Service inspection time",
             icon="mdi:room-service-outline",
-            unit="days", state_class=None
+            unit="days",
+            state_class=None,
         ),
         Sensor(
             attr="service_inspection_distance",
             name="Service inspection distance",
             icon="mdi:room-service-outline",
-            unit="km", state_class=None
+            unit="km",
+            state_class=None,
         ),
         Sensor(
-            attr="oil_change_time", name="Oil change time", icon="mdi:oil", unit="days", state_class=None
+            attr="oil_change_time",
+            name="Oil change time",
+            icon="mdi:oil",
+            unit="days",
+            state_class=None,
         ),
         Sensor(
             attr="oil_change_distance",
             name="Oil change distance",
             icon="mdi:oil",
-            unit="km", state_class=None
+            unit="km",
+            state_class=None,
         ),
-        Sensor(attr="oil_level", name="Oil level", icon="mdi:oil", unit="%", state_class=None),
+        Sensor(
+            attr="oil_level",
+            name="Oil level",
+            icon="mdi:oil",
+            unit="%",
+            state_class=None,
+        ),
         Sensor(
             attr="charging_state",
             name="Charging state",
             icon="mdi:car-battery",
-            unit=None, state_class=None
+            unit=None,
+            state_class=None,
         ),
-        Sensor(attr="charging_mode", name="Charging mode", icon=None, unit=None, state_class=None),
-        Sensor(attr="energy_flow", name="Energy flow", icon=None, unit=None, state_class=None),
+        Sensor(
+            attr="charging_mode",
+            name="Charging mode",
+            icon=None,
+            unit=None,
+            state_class=None,
+        ),
+        Sensor(
+            attr="energy_flow",
+            name="Energy flow",
+            icon=None,
+            unit=None,
+            state_class=None,
+        ),
         Sensor(
             attr="max_charge_current",
             name="Max charge current",
             icon="mdi:current-ac",
-            unit="A", state_class=None
+            unit="A",
+            state_class=None,
         ),
         Sensor(
             attr="primary_engine_type",
             name="Primary engine type",
             icon="mdi:engine",
-            unit=None, state_class=None
+            unit=None,
+            state_class=None,
         ),
         Sensor(
             attr="secondary_engine_type",
             name="Secondary engine type",
             icon="mdi:engine",
-            unit=None, state_class=None
+            unit=None,
+            state_class=None,
         ),
         Sensor(
             attr="primary_engine_range",
             name="Primary engine range",
             icon="mdi:gas-station-outline",
-            unit="km", state_class=None
+            unit="km",
+            state_class=None,
         ),
         Sensor(
             attr="secondary_engine_range",
             name="Secondary engine range",
             icon="mdi:gas-station-outline",
-            unit="km", state_class=None
+            unit="km",
+            state_class=None,
         ),
         Sensor(
             attr="primary_engine_range_percent",
             name="Primary engine Percent",
             icon="mdi:gas-station-outline",
-            unit="%", state_class=None
+            unit="%",
+            state_class=None,
         ),
         Sensor(
             attr="car_type",
             name="Car Type",
             icon="mdi:car-info",
-            unit=None, state_class=None
+            unit=None,
+            state_class=None,
         ),
         Sensor(
             attr="secondary_engine_range_percent",
             name="Secondary engine Percent",
             icon="mdi:gas-station-outline",
-            unit="%", state_class=None
+            unit="%",
+            state_class=None,
         ),
         Sensor(
-            attr="charging_power", name="Charging power", icon="mdi:flash", unit="kW", state_class=None
+            attr="charging_power",
+            name="Charging power",
+            icon="mdi:flash",
+            unit="kW",
+            state_class=None,
         ),
         Sensor(
             attr="actual_charge_rate",
             name="Charging rate",
             icon="mdi:electron-framework",
-            unit=None, state_class=None
+            unit=None,
+            state_class=None,
         ),
-        Sensor(attr="tank_level", name="Tank level", icon="mdi:gas-station", unit="%", state_class=None),
+        Sensor(
+            attr="tank_level",
+            name="Tank level",
+            icon="mdi:gas-station",
+            unit="%",
+            state_class=None,
+        ),
         Sensor(
             attr="state_of_charge",
             name="State of charge",
             icon="mdi:ev-station",
-            unit="%", state_class=None
+            unit="%",
+            state_class=None,
         ),
         Sensor(
             attr="remaining_charging_time",
             name="Remaining charge time",
             icon="mdi:battery-charging",
-            unit=None, state_class=None
+            unit=None,
+            state_class=None,
         ),
-        Sensor(attr="plug_state", name="Plug state", icon="mdi:power-plug", unit=None, state_class=None),
+        Sensor(
+            attr="plug_state",
+            name="Plug state",
+            icon="mdi:power-plug",
+            unit=None,
+            state_class=None,
+        ),
         Sensor(
             attr="plug_lock_state",
             name="Plug Lock state",
             icon="mdi:power-plug",
-            unit=None, state_class=None
+            unit=None,
+            state_class=None,
         ),
         Sensor(
             attr="external_power",
             name="External Power",
             icon="mdi:ev-station",
-            unit=None, state_class=None
+            unit=None,
+            state_class=None,
         ),
         Sensor(
             attr="plug_led_color",
             name="Plug LED Color",
             icon="mdi:power-plug",
-            unit=None, state_class=None
+            unit=None,
+            state_class=None,
         ),
         Sensor(
             attr="doors_trunk_status",
             name="Doors/trunk state",
             icon="mdi:car-door",
-            unit=None, state_class=None
+            unit=None,
+            state_class=None,
         ),
         Sensor(
             attr="climatisation_state",
             name="Climatisation state",
             icon="mdi:air-conditioner",
-            unit=None, state_class=None
+            unit=None,
+            state_class=None,
         ),
         Sensor(
             attr="outdoor_temperature",
             name="Outdoor Temperature",
             icon="mdi:temperature-celsius",
-            unit="°C", state_class=None
+            unit="°C",
+            state_class=None,
         ),
         Sensor(
             attr="preheater_duration",
             name="Preheater runtime",
             icon="mdi:clock",
-            unit="Min", state_class=None
+            unit="Min",
+            state_class=None,
         ),
         Sensor(
             attr="preheater_remaining",
             name="Preheater remaining",
             icon="mdi:clock",
-            unit="Min", state_class=None
+            unit="Min",
+            state_class=None,
         ),
         BinarySensor(attr="sun_roof", name="Sun roof", device_class="window"),
         BinarySensor(
