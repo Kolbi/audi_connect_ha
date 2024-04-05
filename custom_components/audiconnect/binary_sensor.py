@@ -41,3 +41,8 @@ class AudiSensor(AudiEntity, BinarySensorEntity):
         if self._instrument.device_class in DEVICE_CLASSES:
             return self._instrument.device_class
         return None
+
+  @property
+    def state_class(self):
+        """Return the state_class"""
+        return self._instrument.state_class
