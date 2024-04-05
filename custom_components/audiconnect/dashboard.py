@@ -129,7 +129,7 @@ class Sensor(Instrument):
         super().__init__(component="sensor", attr=attr, name=name, icon=icon)
         self.device_class = None
         self._unit = unit
-        self._state_class = state_class
+        self.state_class = state_class
         self._convert = False
 
     def configurate(self, unit_system=None, **config):
