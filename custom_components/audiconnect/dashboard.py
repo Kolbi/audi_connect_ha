@@ -399,7 +399,7 @@ def create_instruments():
             name="Mileage",
             icon="mdi:speedometer",
             unit="km",
-            state_class=total_increasing,
+            state_class="total_increasing",
         ),
         Sensor(
             attr="service_adblue_distance",
