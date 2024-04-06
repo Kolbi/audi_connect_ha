@@ -113,7 +113,7 @@ class AudiDeviceTracker(TrackerEntity):
 
     @property
     def unique_id(self):
-        return self._instrument.full_name
+        return f"{self._instrument.vehicle_vin}_{self._instrument.name}"
 
     @property
     def device_info(self):
