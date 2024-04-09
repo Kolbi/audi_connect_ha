@@ -34,6 +34,11 @@ class AudiSwitch(AudiEntity, ToggleEntity):
     def is_on(self):
         """Return true if switch is on."""
         return self._instrument.state
+        
+    @property
+    def device_class(self):
+        """Return the device_class."""
+        return self._instrument.device_class
 
     async def async_turn_on(self, **kwargs):
         """Turn the switch on."""
