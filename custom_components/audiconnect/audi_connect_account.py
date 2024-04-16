@@ -153,21 +153,16 @@ class AudiConnectAccount:
         # Redact all but the last 4 characters of the VIN
         redacted_vin = "*" * (len(self._vehicle.vin) - 4) + self._vehicle.vin[-4:]
         try:
-            _LOGGER.debug(
-                "Sending command to refresh data for VIN %s", redacted_vin
-            )
+            _LOGGER.debug("Sending command to refresh data for VIN %s", redacted_vin)
 
             await self._audi_service.refresh_vehicle_data(vin)
 
-            _LOGGER.debug(
-                "Successfully refreshed data for VIN %s", redacted_vin
-            )
+            _LOGGER.debug("Successfully refreshed data for VIN %s", redacted_vin)
 
             return True
         except Exception as exception:
             log_exception(
-                exception,
-                "Unable to refresh vehicle data for %s", redacted_vin
+                exception, "Unable to refresh vehicle data for %s", redacted_vin
             )
 
             return False
@@ -284,8 +279,7 @@ class AudiConnectAccount:
             )
 
             _LOGGER.debug(
-                "Successfully started climate control for VIN: %s",
-                redacted_vin
+                "Successfully started climate control for VIN: %s", redacted_vin
             )
 
             await self.notify(vin, ACTION_CLIMATISATION)
