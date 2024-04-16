@@ -282,7 +282,7 @@ class AudiConnectAccount:
             )
 
             _LOGGER.debug(
-                "Successfully started climate control for VIN: %s", 
+                "Successfully started climate control for VIN: %s",
                 redacted_vin
             )
 
