@@ -282,7 +282,8 @@ class AudiConnectAccount:
             )
 
             _LOGGER.debug(
-                "Successfully started climate control for VIN: %s", redacted_vin
+                "Successfully started climate control for VIN: %s", 
+                redacted_vin
             )
 
             await self.notify(vin, ACTION_CLIMATISATION)
@@ -291,7 +292,9 @@ class AudiConnectAccount:
 
         except Exception as exception:
             _LOGGER.error(
-                f"Unable to start climate control of vehicle {vin}. Error: {exception}",
+                "Unable to start climate control of vehicle %s. Error: %s",
+                redacted_vin
+                exception
                 exc_info=True,
             )
             return False
