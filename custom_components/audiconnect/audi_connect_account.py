@@ -150,22 +150,24 @@ class AudiConnectAccount:
         if not self._loggedin:
             return False
 
+        # Redact all but the last 4 characters of the VIN
+        redacted_vin = "*" * (len(self._vehicle.vin) - 4) + self._vehicle.vin[-4:]
         try:
             _LOGGER.debug(
-                "Sending command to refresh data to vehicle {vin}".format(vin=vin)
+                "Sending command to refresh data for VIN %s", redacted_vin
             )
 
             await self._audi_service.refresh_vehicle_data(vin)
 
             _LOGGER.debug(
-                "Successfully refreshed data of vehicle {vin}".format(vin=vin)
+                "Successfully refreshed data for VIN %s", redacted_vin
             )
 
             return True
         except Exception as exception:
             log_exception(
                 exception,
-                "Unable to refresh vehicle data of {}".format(vin),
+                "Unable to refresh vehicle data for %s", redacted_vin
             )
 
             return False
