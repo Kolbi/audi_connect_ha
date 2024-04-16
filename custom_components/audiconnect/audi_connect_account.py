@@ -259,8 +259,15 @@ class AudiConnectAccount:
         redacted_vin = "*" * (len(self._vehicle.vin) - 4) + self._vehicle.vin[-4:]
         try:
             _LOGGER.debug(
-                "Sending command to start climate control for VIN %s with settings - Temp(F): %s, Temp(C): %s, Glass Heating: %s, Seat FL: %s, Seat FR: %s, Seat RL: %s, Seat RR: %s", 
-                redacted_vin, temp_f, temp_c, glass_heating, seat_fl, seat_fr, seat_rl, seat_rr
+                "Sending command to start climate control for VIN %s with settings - Temp(F): %s, Temp(C): %s, Glass Heating: %s, Seat FL: %s, Seat FR: %s, Seat RL: %s, Seat RR: %s",
+                redacted_vin,
+                temp_f,
+                temp_c,
+                glass_heating,
+                seat_fl,
+                seat_fr,
+                seat_rl,
+                seat_rr,
             )
 
             await self._audi_service.start_climate_control(
@@ -274,7 +281,9 @@ class AudiConnectAccount:
                 seat_rr,
             )
 
-            _LOGGER.debug("Successfully started climate control for VIN: %s", redacted_vin)
+            _LOGGER.debug(
+                "Successfully started climate control for VIN: %s", redacted_vin
+            )
 
             await self.notify(vin, ACTION_CLIMATISATION)
 
