@@ -295,8 +295,8 @@ class AudiConnectAccount:
         except Exception as exception:
             _LOGGER.error(
                 "Unable to start climate control of vehicle %s. Error: %s",
-                redacted_vin
-                exception
+                redacted_vin,
+                exception,
                 exc_info=True,
             )
             return False
