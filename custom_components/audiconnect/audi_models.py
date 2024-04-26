@@ -256,6 +256,12 @@ class VehicleDataResponse:
         )
         self._tryAppendStateWithTs(
             data,
+            "preferredChargeMode",
+            -1,
+            ["charging", "chargeMode", "value", "preferredChargeMode"],
+        )
+        self._tryAppendStateWithTs(
+            data,
             "climatisationState",
             -1,
             ["climatisation", "auxiliaryHeatingStatus", "value", "climatisationState"],
