@@ -622,6 +622,12 @@ def create_instruments():
             entity_category=EntityCategory.DIAGNOSTIC,
         ),
         Sensor(
+            attr="preferred_charge_mode",
+            name="Preferred Charge mode",
+            icon="mdi:ev-plug-type1",
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
+        Sensor(
             attr="doors_trunk_status",
             name="Doors/trunk state",
             icon="mdi:car-door",

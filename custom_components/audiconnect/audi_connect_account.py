@@ -1786,6 +1786,17 @@ class AudiConnectVehicle:
             return True
 
     @property
+    def preferred_charge_mode(self):
+        """Return preferred Charge Mode"""
+        if self.preferred_charge_mode_supported:
+            return self._vehicle.state.get("preferredChargeMode")
+
+    @property
+    def preferred_charge_mode_supported(self):
+        check = self._vehicle.state.get("preferredChargeMode")
+        return check is not None
+
+    @property
     def climatisation_state(self):
         if self.climatisation_state_supported:
             return self._vehicle.state.get("climatisationState")
